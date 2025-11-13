@@ -53,16 +53,16 @@ def decrypt(filename):
     with open(filename, "rb") as file:
         encrypted_data = file.read()
     #iv bliver valgt fra byte 1 - 16
-    inv = encrypted_data[:AES.block_size]
+    initilization_vector = encrypted_data[:AES.block_size]
     #cypher text bliver valgt fra byte 17 og frem
-    cyt = encrypted_data[AES.block_size:]
+    ciphertext_bytes = encrypted_data[AES.block_size:]
     #cipher bliver sat med nøgle, modul og iv
-    cipher = AES.new(key, AES.MODE_CBC, iv = inv)
+    cipher = AES.new(key, AES.MODE_CBC, iv = initilization_vector)
     #padded tekst bliver unpadded og dekrypteret
-    pt = unpad(cipher.decrypt(cyt), AES.block_size)
+    decrypted_data = unpad(cipher.decrypt(ciphertext_bytes), AES.block_size)
     #det dekrypterede data bliver skrevet til filen
     with open(filename, "wb") as file:
-        encrypted_data = file.write(pt)
+        encrypted_data = file.write(decrypted_data)
 
 #metode til at kryptere filer der kalder på ovenstående metoder
 #files er en liste med filerne fra directoriet
